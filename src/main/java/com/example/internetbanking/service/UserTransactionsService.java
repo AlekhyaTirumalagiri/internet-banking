@@ -26,8 +26,7 @@ public class UserTransactionsService implements UserTransactionsServiceImpl {
         log.info("Inside getAllUserTransactionsByCategory method");
         try {
             if (!Strings.isNullOrEmpty(category.trim())) {
-                List<UserTransactions> userTransactions = userTransactionRepository.getAllUserTransactionsByCategory(category.trim());
-                return userTransactions;
+                return userTransactionRepository.getAllUserTransactionsByCategory(category.trim());
             } else {
                 throw new NullPointerException();
             }
