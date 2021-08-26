@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +30,7 @@ public class UserTransactionsService implements UserTransactionsServiceImpl {
             if (!Strings.isNullOrEmpty(category.trim())) {
                 return userTransactionRepository.getAllUserTransactionsByCategory(category.trim());
             } else {
-                throw new NullPointerException();
+                return new ArrayList<>();
             }
         } catch (Exception e) {
             throw e;
@@ -43,7 +45,7 @@ public class UserTransactionsService implements UserTransactionsServiceImpl {
             if (!Strings.isNullOrEmpty(category.trim()) && !Strings.isNullOrEmpty(year.trim())) {
                 return userTransactionRepository.getAmountSpentByCategoryAndYear(category.trim(), year.trim());
             } else {
-                throw new NullPointerException();
+                return new HashMap<>();
             }
         } catch (Exception e) {
             throw e;
@@ -56,7 +58,7 @@ public class UserTransactionsService implements UserTransactionsServiceImpl {
             if (!Strings.isNullOrEmpty(category.trim())) {
                 return userTransactionRepository.getTotalOutgoingPerCategory(category.trim());
             } else {
-                throw new NullPointerException();
+                return 0.0;
             }
         } catch (Exception e) {
             throw e;
@@ -70,7 +72,7 @@ public class UserTransactionsService implements UserTransactionsServiceImpl {
                 List<Map<String, Double>> result = userTransactionRepository.getMonthlyAverageSpendPerCategory(category.trim());
                 return result;
             } else {
-                throw new NullPointerException();
+                return new ArrayList<>();
             }
         } catch (Exception e) {
             throw e;

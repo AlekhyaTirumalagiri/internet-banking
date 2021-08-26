@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,10 +44,9 @@ public class UserTransactionsControllerTest {
     }
 
     @Test
-    public void failValidationWhenFetchingAllUserTransactionsByEmptyCategory() {
-        Assertions.assertThrows(Exception.class, () -> {
-            userTransactionsController.getAllUserTransactionsByCategory(" ");
-        });
+    public void failValidationWhenFetchingAllUserTransactionsByEmptyCategory() throws Exception {
+        List<UserTransactions> actual = userTransactionsController.getAllUserTransactionsByCategory(" ");
+        Assert.assertEquals(new ArrayList<UserTransactions>(), actual);
     }
 
     @Test
@@ -69,10 +69,9 @@ public class UserTransactionsControllerTest {
     }
 
     @Test
-    public void failValidationForGetTotalOutgoingTransactionsPerEmptyCategory() {
-        Assertions.assertThrows(Exception.class, () -> {
-            userTransactionsController.getTotalOutgoingTransactionsPerCategory(" ");
-        });
+    public void failValidationForGetTotalOutgoingTransactionsPerEmptyCategory() throws Exception {
+        double expectedResult = userTransactionsController.getTotalOutgoingTransactionsPerCategory(" ");
+        Assert.assertEquals(0.0, expectedResult, 0.1);
     }
 
     @Test
@@ -95,10 +94,9 @@ public class UserTransactionsControllerTest {
     }
 
     @Test
-    public void failValidationForGetMonthlyAverageSpendPerEmptyCategory() {
-        Assertions.assertThrows(Exception.class, () -> {
-            userTransactionsController.getMonthlyAverageSpendPerCategory(" ");
-        });
+    public void failValidationForGetMonthlyAverageSpendPerEmptyCategory() throws Exception {
+        List<Map<String, Double>> expectedResult = userTransactionsController.getMonthlyAverageSpendPerCategory(" ");
+        Assert.assertEquals(0, expectedResult.size());
     }
 
     @Test
